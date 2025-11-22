@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package model.v1;
+
+enum NSFWScore {
+  NSFW_SCORE_UNSPECIFIED = 0;
+  NSFW_SCORE_PG = 1;
+  NSFW_SCORE_PG_13 = 2;
+  NSFW_SCORE_R = 3;
+  NSFW_SCORE_X = 4;
+  NSFW_SCORE_XXX = 5;
+}
+
+service ImageSafetyService {
+  rpc GenerateNSFWScoreFromImage(
+    ImageSafetyRequest
+  ) returns (ImageSafetyResponse);
+  rpc GenerateBatchNSFWScoresFromImages(
+    BatchImageSafetyRequest
+  ) returns (stream ImageSafetyResponse);
+}
+
+message ImageSafetyRequest {
+  string request_id = 1;
+  string model_name = 2;
+  string image_uri = 3;
+}
+
+message ImageSafetyResponse {
+  string request_id = 1;
+  string model_name = 2;
+  string image_uri = 3;
+  NSFWScore nsfw_score = 4;
+  int64 inference_time_millis = 5;
+}
+
+message BatchImageSafetyRequest {
+  string request_id = 1;
+  string model_name = 2;
+  repeated string image_uris = 3;
+}

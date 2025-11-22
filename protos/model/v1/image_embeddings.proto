@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package model.v1;
+
+service ImageEmbeddingsService {
+  rpc GenerateImageEmbedding(
+    ImageEmbeddingRequest
+  ) returns (ImageEmbeddingResponse);
+  rpc GenerateBatchImageEmbeddings(
+    BatchImageEmbeddingRequest
+  ) returns (stream ImageEmbeddingResponse);
+  rpc GenerateImageEmbeddingStream(
+    stream ImageEmbeddingRequest
+  ) returns (stream ImageEmbeddingResponse);
+}
+
+message ImageEmbeddingRequest {
+  string request_id = 1;
+  string model_name = 2;
+  string image_uri = 3;
+}
+
+message ImageEmbeddingResponse {
+  string request_id = 1;
+  repeated float embedding_vectors = 2;
+  int64 inference_time_millis = 3;
+}
+
+message BatchImageEmbeddingRequest {
+  string request_id = 1;
+  string model_name = 2;
+  repeated string image_uris = 3;
+}

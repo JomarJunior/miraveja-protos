@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package model.v1;
+
+service ImageTitleService {
+  rpc GenerateTitleFromImage(
+    ImageTitleRequest
+  ) returns (ImageTitleResponse);
+  rpc GenerateBatchTitlesFromImages(
+    BatchImageTitleRequest
+  ) returns (stream ImageTitleResponse);
+  rpc GenerateImageTitlesStream(
+    stream ImageTitleRequest
+  ) returns (stream ImageTitleResponse);
+}
+
+message ImageTitleRequest {
+  string request_id = 1;
+  string model_name = 2;
+  string image_uri = 3;
+}
+
+message ImageTitleResponse {
+  string request_id = 1;
+  string model_name = 2;
+  string image_uri = 3;
+  string title = 4;
+  int64 inference_time_millis = 5;
+}
+
+message BatchImageTitleRequest {
+  string request_id = 1;
+  string model_name = 2;
+  repeated string image_uris = 3;
+}

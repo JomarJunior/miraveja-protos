@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package model.v1;
+
+service PostTextService {
+  rpc GeneratePostTextFromImages(
+    PostTextRequest
+  ) returns (PostTextResponse);
+}
+
+message PostTextRequest {
+  string request_id = 1;
+  string model_name = 2;
+  repeated string image_uris = 3;
+}
+
+message PostTextResponse {
+  string request_id = 1;
+  string model_name = 2;
+  repeated string image_uris = 3;
+  string post_text = 4;
+  int64 inference_time_millis = 5;
+}

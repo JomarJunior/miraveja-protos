@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package model.v1;
+
+service TextEmbeddingsService {
+  rpc GenerateTextEmbedding(
+    TextEmbeddingRequest
+  ) returns (TextEmbeddingResponse);
+  rpc GenerateBatchTextEmbeddings(
+    BatchTextEmbeddingRequest
+  ) returns (stream TextEmbeddingResponse);
+  rpc GenerateTextEmbeddingStream(
+    stream TextEmbeddingRequest
+  ) returns (stream TextEmbeddingResponse);
+}
+
+message TextEmbeddingRequest {
+  string request_id = 1;
+  string model_name = 2;
+  string text = 3;
+}
+
+message TextEmbeddingResponse {
+  string request_id = 1;
+  string model_name = 2;
+  string text = 3;
+  repeated float embedding_vectors = 4;
+  int64 inference_time_millis = 5;
+}
+
+message BatchTextEmbeddingRequest {
+  string request_id = 1;
+  string model_name = 2;
+  repeated string texts = 3;
+}

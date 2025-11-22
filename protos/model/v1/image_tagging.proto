@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package model.v1;
+
+service ImageTaggingService {
+  rpc GenerateTagsFromImage(
+    ImageTaggingRequest
+  ) returns (ImageTaggingResponse);
+  rpc GenerateBatchTagsFromImages(
+    BatchImageTaggingRequest
+  ) returns (stream ImageTaggingResponse);
+  rpc GenerateImageTagsStream(
+    stream ImageTaggingRequest
+  ) returns (stream ImageTaggingResponse);
+}
+
+message ImageTaggingRequest {
+  string request_id = 1;
+  string model_name = 2;
+  string image_uri = 3;
+}
+
+message ImageTaggingResponse {
+  string request_id = 1;
+  string model_name = 2;
+  string image_uri = 3;
+  repeated string tags = 4;
+  int64 inference_time_millis = 5;
+}
+
+message BatchImageTaggingRequest {
+  string request_id = 1;
+  string model_name = 2;
+  repeated string image_uris = 3;
+}

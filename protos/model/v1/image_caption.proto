@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package model.v1;
+
+service ImageCaptionService {
+  rpc GenerateDescriptionFromImage(
+    ImageCaptionRequest
+  ) returns (ImageCaptionResponse);
+  rpc GenerateBatchDescriptionsFromImages(
+    BatchImageCaptionRequest
+  ) returns (stream ImageCaptionResponse);
+  rpc GenerateImageCaptionsStream(
+    stream ImageCaptionRequest
+  ) returns (stream ImageCaptionResponse);
+}
+
+message ImageCaptionRequest {
+  string request_id = 1;
+  string model_name = 2;
+  string image_uri = 3;
+}
+
+message ImageCaptionResponse {
+  string request_id = 1;
+  string model_name = 2;
+  string image_uri = 3;
+  string description = 4;
+  int64 inference_time_millis = 5;
+}
+
+message BatchImageCaptionRequest {
+  string request_id = 1;
+  string model_name = 2;
+  repeated string image_uris = 3;
+}

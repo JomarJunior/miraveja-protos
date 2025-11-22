@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+package model.v1;
+
+// Image Generation Types
+message LoraParameters {
+  string name = 1;
+  float weight = 2;
+}
+
+message ImageGenerationParameters {
+  string prompt = 1;
+  string negative_prompt = 2;
+  int32 width = 3;
+  int32 height = 4;
+  int32 cfg_scale = 5;
+  int32 steps = 6;
+  int32 seed = 7;
+  repeated LoraParameters loras = 8;
+  string scheduler = 9;
+  string sampler = 10;
+}
+
+// Image Generation Service
+service ImageGenerationService {
+  rpc GenerateImage(
+    ImageGenerationRequest
+  ) returns (ImageGenerationResponse);
+  rpc GenerateBatchImages(
+    BatchImageGenerationRequest
+  ) returns (stream ImageGenerationResponse);
+  rpc GenerateImageStream(
+    stream ImageGenerationRequest
+  ) returns (stream ImageGenerationResponse);
+}
+
+message ImageGenerationRequest {
+  string request_id = 1;
+  string model_name = 2;
+  ImageGenerationParameters parameters = 3;
+}
+
+message ImageGenerationResponse {
+  string request_id = 1;
+  string model_name = 2;
+  ImageGenerationParameters parameters = 3;
+  string image_uri = 4;
+  int64 inference_time_millis = 5;
+}
+
+message BatchImageGenerationRequest {
+  string request_id = 1;
+  string model_name = 2;
+  repeated ImageGenerationParameters batch_parameters = 3;
+}
