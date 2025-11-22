@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "miraveja-protos"
-version = "0.1.1"
+version = "0.1.2"
 description = "A versioned, centralized protobuf specification package for all MiraVeja microservices, distributed as a PyPI package."
 authors = ["Jomar Júnior de Souza Pereira <jomarjunior@poli.ufrj.br>"]
 readme = "README.md"
