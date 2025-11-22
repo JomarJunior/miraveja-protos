@@ -36,26 +36,26 @@ jobs:
         run: |
           protolint lint protos
 
-    dry-run-compile:
-      name: Dry Run Protobuf Compilation
-      runs-on: ubuntu-latest
+  dry-run-compile:
+    name: Dry Run Protobuf Compilation
+    runs-on: ubuntu-latest
 
-      steps:
-        - name: Checkout repo
-          uses: actions/checkout@v4
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
 
-        - name: Install protoc and grpc tools
-          run: |
-            PROTOC_ZIP=protoc-27.1-linux-x86_64.zip
-            curl -LO "https://github.com/protocolbuffers/protobuf/releases/download/v27.1/$PROTOC_ZIP"
-            sudo unzip -o $PROTOC_ZIP -d /usr/local bin/protoc
-            sudo unzip -o $PROTOC_ZIP -d /usr/local include/*
-            rm -f $PROTOC_ZIP
-        
-        - name: Install grpcio-tools
-          run: |
-            python3 -m pip install grpcio-tools==1.66.1
+      - name: Install protoc and grpc tools
+        run: |
+          PROTOC_ZIP=protoc-27.1-linux-x86_64.zip
+          curl -LO "https://github.com/protocolbuffers/protobuf/releases/download/v27.1/$PROTOC_ZIP"
+          sudo unzip -o $PROTOC_ZIP -d /usr/local bin/protoc
+          sudo unzip -o $PROTOC_ZIP -d /usr/local include/*
+          rm -f $PROTOC_ZIP
 
-        - name: Dry run compile .proto files
-          run: |
-            python3 -m grpc_tools.protoc -I=protos --python_out=/tmp --grpc_python_out=/tmp protos/*.proto
+      - name: Install grpcio-tools
+        run: |
+          python3 -m pip install grpcio-tools==1.66.1
+
+      - name: Dry run compile .proto files
+        run: |
+          python3 -m grpc_tools.protoc -I=protos --python_out=/tmp --grpc_python_out=/tmp protos/*.proto
