@@ -51,7 +51,8 @@ jobs:
 
       - name: Install proto tools (grpc & lint)
         run: |
-          poetry run pip install grpcio==1.66.1 grpcio-tools==1.66.1 protolint
+          poetry config virtualenvs.create false
+          poetry install --only-main --no-root
 
       - name: Generate protobuf Python code
         run: |
