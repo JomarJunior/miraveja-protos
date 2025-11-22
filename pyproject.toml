@@ -36,6 +36,9 @@ classifiers = [
 packages = [
     { include = "miraveja_protos", from = "src" }
 ]
+include = [
+    { path = "src/miraveja_protos/generated/**" }
+]
 
 [tool.poetry.dependencies]
 python = "<3.15,>=3.10"
