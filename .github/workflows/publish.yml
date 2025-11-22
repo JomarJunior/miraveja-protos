@@ -58,6 +58,7 @@ jobs:
         run: |
           chmod +x scripts/generate_python.sh
           scripts/generate_python.sh
+          git add src/miraveja_protos/generated/* -f
 
       - name: Build package
         run: poetry build
