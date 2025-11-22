@@ -52,9 +52,10 @@ jobs:
       - name: Install proto tools (grpc & lint)
         run: |
           poetry run pip install grpcio==1.66.1 grpcio-tools==1.66.1 protolint
-        
+
       - name: Generate protobuf Python code
         run: |
+          chmod +x scripts/generate_python.sh
           scripts/generate_python.sh
 
       - name: Build package
