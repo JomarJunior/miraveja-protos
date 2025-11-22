@@ -58,4 +58,5 @@ jobs:
 
       - name: Dry run compile .proto files
         run: |
+          chmod +x scripts/dry_run_python.sh
           scripts/dry_run_python.sh
