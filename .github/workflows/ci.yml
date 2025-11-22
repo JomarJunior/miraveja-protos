@@ -58,4 +58,4 @@ jobs:
 
       - name: Dry run compile .proto files
         run: |
-          python3 -m grpc_tools.protoc -I=protos --python_out=/tmp --grpc_python_out=/tmp protos/*.proto
+          scripts/dry_run_python.sh
