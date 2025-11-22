@@ -1,0 +1,52 @@
+[tool.poetry]
+name = "miraveja-protos"
+version = "0.1.0"
+description = "A versioned, centralized protobuf specification package for all MiraVeja microservices, distributed as a PyPI package."
+authors = ["Jomar Júnior de Souza Pereira <jomarjunior@poli.ufrj.br>"]
+readme = "README.md"
+license = "MIT"
+homepage = "https://github.com/JomarJunior/miraveja-protos"
+repository = "https://github.com/JomarJunior/miraveja-protos"
+documentation = "https://github.com/JomarJunior/miraveja-protos#readme"
+keywords = [
+    "protobuf",
+    "protos",
+    "miraveja",
+    "microservices",
+    "pypi",
+    "python",
+    "gRPC",
+    "protocol-buffers",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: System :: Logging",
+    "Typing :: Typed",
+]
+packages = [
+    { include = "miraveja_protos", from = "src" }
+]
+
+[tool.poetry.dependencies]
+python = "<3.15,>=3.10"
+grpcio = "^1.76.0"
+grpcio-tools = "^1.76.0"
+protolint = "^1.1.4"
+
+[tool.poetry.group.dev.dependencies]
+# Git hooks manager for automated checks
+pre-commit = "^4.4.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

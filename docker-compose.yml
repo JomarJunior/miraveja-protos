@@ -1,0 +1,10 @@
+services:
+  protoc_generate_python:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: >
+      "generate_python.sh"
+    volumes:
+      - .:/build
+      - ./scripts:/usr/local/bin/

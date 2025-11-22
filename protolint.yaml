@@ -1,0 +1,4 @@
+lint:
+  rules:
+    add:
+      - IMPORT_ORDER
