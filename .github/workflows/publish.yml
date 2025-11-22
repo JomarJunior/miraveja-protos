@@ -52,7 +52,7 @@ jobs:
       - name: Install proto tools (grpc & lint)
         run: |
           poetry config virtualenvs.create false
-          poetry install --only main --no-root
+          poetry install --only main
 
       - name: Generate protobuf Python code
         run: |
